@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO Meta Tags -->
+  <title>Juan Camilo Bolaños | Consultoría y Sistemas de Automatización con IA</title>
+  <meta name="description" content="Optimiza tus operaciones y escala tu negocio. Implementación a medida de flujos autónomos con n8n e integración de agentes de IA en servidores privados (VPS).">
+  <meta name="author" content="Juan Camilo Bolaños">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Juan Camilo Bolaños | Sistemas de IA y Automatización">
+  <meta property="og:description" content="Estrategias y soluciones tecnológicas a medida para dueños de negocios y empresas medianas. Agenda tu diagnóstico gratuito.">
+  
+  <!-- Inline SVG Tech Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2310B981' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/%3E%3C/svg%3E">
+
+  <!-- Google Fonts: Outfit (Headings) & Inter (Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Custom Tailwind Configuration -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              navy: {
+                50: '#F4F6FA',
+                100: '#E8ECF5',
+                800: '#1E293B',
+                900: '#0F172A', // Deep corporate Slate-900
+                950: '#0A0F1D', // Ultra dark background
+              },
+              whatsapp: {
+                DEFAULT: '#25D366',
+                hover: '#20BA5A',
+              },
+              accent: {
+                emerald: '#10B981', // Tech Green
+                cyan: '#06B6D4',    // Modern Blue-Green
+              }
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            heading: ['Outfit', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Custom styles for micro-animations and clean states -->
+  <style>
+    .glass-effect {
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    
+    .fade-in-up {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .fade-in-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Accordion Custom Transitions */
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+    }
+  </style>
+</head>
+<body class="bg-brand-navy-950 text-slate-100 font-sans antialiased selection:bg-brand-accent-emerald selection:text-brand-navy-950">
+
+  <!-- NAVBAR / HEADER -->
+  <header class="fixed top-0 left-0 w-full z-50 transition-all duration-300 glass-effect" id="main-header">
+    <nav class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <a href="#" class="flex items-center space-x-2 group">
+        <div class="h-9 w-9 rounded-lg bg-gradient-to-tr from-brand-accent-emerald to-brand-accent-cyan flex items-center justify-center text-brand-navy-950 font-bold text-lg font-heading shadow-md">
+          JC
+        </div>
+        <span class="font-heading font-bold text-lg md:text-xl tracking-tight text-white transition-colors duration-300 group-hover:text-brand-accent-emerald">
+          Juan Camilo Bolaños <span class="text-slate-400 font-light text-sm hidden sm:inline">| Sistemas de IA</span>
+        </span>
+      </a>
+
+      <!-- Desktop Nav & CTA -->
+      <div class="hidden md:flex items-center space-x-8">
+        <a href="#problema" class="text-sm font-medium text-slate-300 hover:text-white transition-colors">El Dolor</a>
+        <a href="#servicios" class="text-sm font-medium text-slate-300 hover:text-white transition-colors">Servicios</a>
+        <a href="#sobre-mi" class="text-sm font-medium text-slate-300 hover:text-white transition-colors">Sobre Mí</a>
+        <a href="#faq" class="text-sm font-medium text-slate-300 hover:text-white transition-colors">Preguntas</a>
+        
+        <!-- Navbar CTA -->
+        <a id="nav-cta" href="https://wa.me/573003974565?text=Hola%20Juan%20Camilo,%20me%20gustar%C3%ADa%20agendar%20una%20sesi%C3%B3n%20de%20diagn%C3%B3stico%20estrat%C3%A9gico%20para%20mi%20negocio." 
+           target="_blank" rel="noopener noreferrer" 
+           class="inline-flex items-center gap-2 px-5 h-11 text-sm font-semibold rounded-full text-white bg-slate-800 hover:bg-slate-700 border border-slate-700 transition-all duration-300 hover:scale-[1.02]">
+          <i data-lucide="phone" class="w-4 h-4 text-brand-accent-emerald"></i>
+          <span>Agendar Diagnóstico</span>
+        </a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button class="md:hidden p-2 text-slate-400 hover:text-white transition-colors" id="mobile-menu-btn" aria-label="Abrir menú">
+        <i data-lucide="menu" class="w-6 h-6"></i>
+      </button>
+    </nav>
+
+    <!-- Mobile Navigation Overlay -->
+    <div id="mobile-menu" class="hidden md:hidden absolute top-20 left-0 w-full bg-brand-navy-900 border-b border-slate-800 py-6 px-6 shadow-xl space-y-4">
+      <a href="#problema" class="block text-base font-medium text-slate-300 hover:text-white transition-colors py-2 mobile-link">El Dolor</a>
+      <a href="#servicios" class="block text-base font-medium text-slate-300 hover:text-white transition-colors py-2 mobile-link">Servicios</a>
+      <a href="#sobre-mi" class="block text-base font-medium text-slate-300 hover:text-white transition-colors py-2 mobile-link">Sobre Mí</a>
+      <a href="#faq" class="block text-base font-medium text-slate-300 hover:text-white transition-colors py-2 mobile-link">Preguntas</a>
+      
+      <!-- Mobile CTA -->
+      <a href="https://wa.me/573003974565?text=Hola%20Juan%20Camilo,%20me%20gustar%C3%ADa%20agendar%20una%20sesi%C3%B3n%20de%20diagn%C3%B3stico%20estrat%C3%A9gico%20para%20mi%20negocio." 
+         target="_blank" rel="noopener noreferrer"
+         class="flex items-center justify-center gap-2 w-full py-3 text-base font-semibold rounded-xl text-white bg-brand-whatsapp hover:bg-brand-whatsapp-hover transition-colors shadow-lg">
+        <i data-lucide="message-square" class="w-5 h-5"></i>
+        <span>Escribir por WhatsApp</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="relative min-h-screen pt-32 pb-20 flex items-center overflow-hidden">
+    <!-- Subtle Background Glows -->
+    <div class="absolute top-1/4 left-1/10 w-96 h-96 bg-brand-accent-cyan/10 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="absolute bottom-1/4 right-1/10 w-96 h-96 bg-brand-accent-emerald/10 rounded-full blur-[120px] pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center relative z-10">
+      
+      <!-- Left Column: Copywriting -->
+      <div class="lg:col-span-7 space-y-8 fade-in-up text-left" id="hero-content">
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900 border border-slate-800 text-xs font-semibold tracking-wide text-brand-accent-emerald uppercase">
+          <span class="w-2 h-2 rounded-full bg-brand-accent-emerald animate-pulse"></span>
+          Consultoría & Integración Tecnológica
+        </div>
+
+        <h1 class="font-heading font-extrabold text-4xl sm:text-5xl lg:text-6xl text-white leading-tight tracking-tight">
+          Optimiza tus operaciones y escala tu negocio con <span class="bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-100 to-brand-accent-emerald">Sistemas de IA y Automatización</span> Avanzada
+        </h1>
+
+        <p class="text-lg md:text-xl text-slate-400 font-light leading-relaxed max-w-2xl">
+          No desarrollo software desde cero; implemento, integro y configuro arquitecturas eficientes a la medida de tus flujos de trabajo actuales.
+        </p>
+
+        <!-- CTA Action Area -->
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-4">
+          <a id="hero-cta" href="https://wa.me/573003974565?text=Hola%20Juan%20Camilo,%20me%20gustar%C3%ADa%20agendar%20una%20sesi%C3%B3n%20de%20diagn%C3%B3stico%20estrat%C3%A9gico%20para%20mi%20negocio." 
+             target="_blank" rel="noopener noreferrer"
+             class="inline-flex items-center justify-center gap-3 px-8 py-4 text-base font-bold rounded-xl text-brand-navy-950 bg-brand-accent-emerald hover:bg-emerald-400 transition-all duration-300 hover:scale-[1.02] shadow-lg shadow-brand-accent-emerald/20 hover:shadow-brand-accent-emerald/30 group">
+            <i data-lucide="message-square" class="w-5 h-5 fill-brand-navy-950"></i>
+            <span>Escribir por WhatsApp</span>
+            <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i>
+          </a>
+          <span class="text-xs text-slate-500 font-medium text-center sm:text-left">
+            🚀 Sesión de Diagnóstico 100% Sin Costo
+          </span>
+        </div>
+      </div>
+
+      <!-- Right Column: Profile Picture with Asymmetric Styling -->
+      <div class="lg:col-span-5 flex justify-center lg:justify-end fade-in-up" id="hero-image-container">
+        <div class="relative w-72 h-72 sm:w-80 sm:h-80 lg:w-96 lg:h-96">
+          
+          <!-- Decorative Background Frame -->
+          <div class="absolute inset-0 border-2 border-dashed border-slate-700/60 rounded-3xl -translate-x-4 -translate-y-4 pointer-events-none"></div>
+          
+          <!-- Ambient Glow behind image -->
+          <div class="absolute inset-0 bg-gradient-to-tr from-brand-accent-emerald/30 to-brand-accent-cyan/30 rounded-3xl blur-2xl -z-10 translate-x-4 translate-y-4"></div>
+          
+          <!-- Image container with mask effect -->
+          <div class="w-full h-full rounded-3xl overflow-hidden bg-slate-900 border border-slate-800 shadow-2xl relative z-10 group">
+            <!-- Developer Note: Replace Juan-Camilo.png or foto-perfil.jpg in local workspace folder -->
+            <img src="Juan-Camilo.png" 
+                 onerror="this.onerror=null; this.src='foto-perfil.jpg'; this.parentElement.innerHTML='<div class=\'w-full h-full flex flex-col items-center justify-center text-slate-500 p-6 text-center\'><i data-lucide=\'user\' class=\'w-16 h-16 text-slate-700 mb-4\'></i><p class=\'text-sm font-semibold\'>[Coloca tu foto aquí]</p><p class=\'text-xs text-slate-600 mt-1\'>Carga Juan-Camilo.png o foto-perfil.jpg en tu carpeta del proyecto</p></div>'; lucide.createIcons();" 
+                 alt="Juan Camilo Bolaños" 
+                 class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700">
+            
+            <!-- Sleek Glass Badge -->
+            <div class="absolute bottom-4 left-4 right-4 glass-effect py-3 px-4 rounded-xl border border-white/10 z-20 flex items-center gap-3">
+              <div class="w-3 h-3 rounded-full bg-emerald-500 animate-ping"></div>
+              <div>
+                <p class="text-xs text-slate-400 font-medium leading-none">Disponibilidad Actual</p>
+                <p class="text-sm font-semibold text-white mt-1">2 Cupos para Proyectos Activos</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </section>
+
+  <!-- EL PROBLEMA (El dolor del negocio) -->
+  <section id="problema" class="py-24 bg-brand-navy-900 border-y border-slate-900 relative">
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+      
+      <!-- Section Header -->
+      <div class="max-w-3xl mx-auto text-center space-y-4 mb-16">
+        <h2 class="text-xs font-bold uppercase tracking-wider text-brand-accent-cyan">El Diagnóstico Inicial</h2>
+        <p class="font-heading font-bold text-3xl sm:text-4xl text-white">
+          ¿Tu negocio crece más rápido que la eficiencia de tu equipo?
+        </p>
+        <p class="text-slate-400 font-light text-base">
+          El crecimiento sin sistemas organizados genera fricción interna, cuellos de botella y pérdida de rentabilidad.
+        </p>
+      </div>
+
+      <!-- Problem Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Card 1 -->
+        <div class="p-8 rounded-2xl bg-slate-950 border border-slate-800/80 hover:border-slate-700 transition-all duration-300 group flex flex-col justify-between">
+          <div class="space-y-6">
+            <div class="w-12 h-12 rounded-xl bg-red-500/10 flex items-center justify-center border border-red-500/20 text-red-400 group-hover:bg-red-500/20 transition-all duration-300">
+              <i data-lucide="clock" class="w-6 h-6"></i>
+            </div>
+            <div class="space-y-2">
+              <h3 class="font-heading font-semibold text-xl text-white">Procesos Manuales Lentos</h3>
+              <p class="text-slate-400 font-light text-sm leading-relaxed">
+                Tu equipo desperdicia horas semanales copiando datos, enviando correos rutinarios y actualizando hojas de cálculo manualmente.
+              </p>
+            </div>
+          </div>
+          <div class="pt-6 border-t border-slate-900 mt-6 flex items-center text-xs text-red-400 font-medium gap-1.5">
+            <i data-lucide="alert-triangle" class="w-4 h-4"></i> Consecuencia: Cero tiempo para escalar.
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="p-8 rounded-2xl bg-slate-950 border border-slate-800/80 hover:border-slate-700 transition-all duration-300 group flex flex-col justify-between">
+          <div class="space-y-6">
+            <div class="w-12 h-12 rounded-xl bg-orange-500/10 flex items-center justify-center border border-orange-500/20 text-orange-400 group-hover:bg-orange-500/20 transition-all duration-300">
+              <i data-lucide="link-2-off" class="w-6 h-6"></i>
+            </div>
+            <div class="space-y-2">
+              <h3 class="font-heading font-semibold text-xl text-white">Herramientas Desconectadas</h3>
+              <p class="text-slate-400 font-light text-sm leading-relaxed">
+                El CRM, WhatsApp, el correo y tu software administrativo operan como islas. Los datos no fluyen de forma directa ni automática.
+              </p>
+            </div>
+          </div>
+          <div class="pt-6 border-t border-slate-900 mt-6 flex items-center text-xs text-orange-400 font-medium gap-1.5">
+            <i data-lucide="alert-triangle" class="w-4 h-4"></i> Consecuencia: Pérdida de prospectos y errores.
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="p-8 rounded-2xl bg-slate-950 border border-slate-800/80 hover:border-slate-700 transition-all duration-300 group flex flex-col justify-between">
+          <div class="space-y-6">
+            <div class="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center border border-amber-500/20 text-amber-400 group-hover:bg-amber-500/20 transition-all duration-300">
+              <i data-lucide="trending-down" class="w-6 h-6"></i>
+            </div>
+            <div class="space-y-2">
+              <h3 class="font-heading font-semibold text-xl text-white">Pérdida de Tiempo Operativo</h3>
+              <p class="text-slate-400 font-light text-sm leading-relaxed">
+                Tus directores e ingenieros clave resuelven problemas administrativos básicos en lugar de centrarse en la entrega y calidad de tu servicio.
+              </p>
+            </div>
+          </div>
+          <div class="pt-6 border-t border-slate-900 mt-6 flex items-center text-xs text-amber-400 font-medium gap-1.5">
+            <i data-lucide="alert-triangle" class="w-4 h-4"></i> Consecuencia: Crecimiento estancado e ineficiencia.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- MIS SERVICIOS -->
+  <section id="servicios" class="py-24 bg-brand-navy-950 relative">
+    
+    <!-- Design accent background light -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-accent-emerald/5 rounded-full blur-[140px] pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+      
+      <!-- Section Header -->
+      <div class="max-w-3xl mx-auto text-center space-y-4 mb-20">
+        <h2 class="text-xs font-bold uppercase tracking-wider text-brand-accent-emerald">Soluciones a Medida</h2>
+        <p class="font-heading font-bold text-3xl sm:text-4xl text-white">
+          Sistemas Robustos para una Operación Eficiente
+        </p>
+        <p class="text-slate-400 font-light text-base">
+          Diseño arquitecturas digitales robustas e independientes que automatizan tus operaciones repetitivas e integran inteligencia artificial sin añadir complejidad.
+        </p>
+      </div>
+
+      <!-- Services Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <!-- Service Pillar A -->
+        <div class="p-8 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-slate-700/80 transition-all duration-300 relative group flex flex-col justify-between">
+          <div class="space-y-6">
+            <div class="w-12 h-12 rounded-xl bg-brand-accent-emerald/10 flex items-center justify-center border border-brand-accent-emerald/20 text-brand-accent-emerald group-hover:bg-brand-accent-emerald/20 transition-all duration-300">
+              <i data-lucide="search" class="w-6 h-6"></i>
+            </div>
+            
+            <div class="space-y-3">
+              <h3 class="font-heading font-semibold text-2xl text-white group-hover:text-brand-accent-emerald transition-colors">
+                Auditoría y Estrategia de Sistemas
+              </h3>
+              <p class="text-slate-400 font-light text-sm leading-relaxed">
+                Analizo a fondo la infraestructura y flujos de trabajo actuales de tu negocio. Identifico cuellos de botella reales y planifico la arquitectura ideal para automatizar procesos clave sin romper nada.
+              </p>
+            </div>
+          </div>
+
+          <div class="mt-8 pt-6 border-t border-slate-800 space-y-3">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500">¿Qué incluye?</h4>
+            <ul class="text-xs text-slate-400 space-y-2">
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-accent-emerald"></i> Mapeo de flujos operativos</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-accent-emerald"></i> Diagnóstico de herramientas</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-accent-emerald"></i> Plan de integración por fases</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Service Pillar B -->
+        <div class="p-8 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-slate-700/80 transition-all duration-300 relative group flex flex-col justify-between">
+          <div class="space-y-6">
+            
+            <!-- Tool branding row (n8n) -->
+            <div class="flex items-center justify-between">
+              <div class="w-12 h-12 rounded-xl bg-brand-accent-cyan/10 flex items-center justify-center border border-brand-accent-cyan/20 text-brand-accent-cyan group-hover:bg-brand-accent-cyan/20 transition-all duration-300">
+                <i data-lucide="git-merge" class="w-6 h-6"></i>
+              </div>
+              
+              <!-- Custom styled n8n Logo (as requested) -->
+              <div class="flex items-center gap-1.5 bg-slate-950 px-3 py-1.5 rounded-full border border-slate-800 shadow-inner">
+                <!-- Custom Orange/Coral Vector Nodes for n8n -->
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 14h-2v-2h2v2zm0-4h-2V7h2v5z" fill="%23FF6D5A" class="hidden"/>
+                  <circle cx="8" cy="12" r="3" fill="#EA4C89"/>
+                  <circle cx="16" cy="12" r="3" fill="#FF6D5A"/>
+                  <line x1="11" y1="12" x2="13" y2="12" stroke="#FFFFFF" stroke-width="2"/>
+                </svg>
+                <span class="text-[10px] font-bold text-white tracking-widest uppercase">n8n Expert</span>
+              </div>
+            </div>
+            
+            <div class="space-y-3">
+              <h3 class="font-heading font-semibold text-2xl text-white group-hover:text-brand-accent-cyan transition-colors">
+                Implementación de Flujos Autónomos
+              </h3>
+              <p class="text-slate-400 font-light text-sm leading-relaxed">
+                Conecto tus herramientas del día a día (CRM, mensajería, pasarelas de pago, correo, bases de datos) mediante pipelines automatizados avanzados en <strong class="text-slate-200">n8n</strong>. Cero transferencias manuales de información.
+              </p>
+            </div>
+          </div>
+
+          <div class="mt-8 pt-6 border-t border-slate-800 space-y-3">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500">¿Qué incluye?</h4>
+            <ul class="text-xs text-slate-400 space-y-2">
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-accent-cyan"></i> Webhooks & APIs personalizadas</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-accent-cyan"></i> Notificaciones y reportes en tiempo real</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-accent-cyan"></i> Migración de datos entre sistemas</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Service Pillar C -->
+        <div class="p-8 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-slate-700/80 transition-all duration-300 relative group flex flex-col justify-between">
+          <div class="space-y-6">
+            
+            <!-- Tool branding row (OpenClaw) -->
+            <div class="flex items-center justify-between">
+              <div class="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center border border-emerald-500/20 text-emerald-400 group-hover:bg-emerald-500/20 transition-all duration-300">
+                <i data-lucide="cpu" class="w-6 h-6"></i>
+              </div>
+              
+              <!-- Custom styled OpenClaw representation -->
+              <div class="flex items-center gap-1.5 bg-slate-950 px-3 py-1.5 rounded-full border border-slate-800 shadow-inner">
+                <svg class="w-3.5 h-3.5 text-brand-accent-emerald" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83M12 9a3 3 0 100 6 3 3 0 000-6z"></path>
+                </svg>
+                <span class="text-[10px] font-bold text-white tracking-widest uppercase">OpenClaw / VPS</span>
+              </div>
+            </div>
+            
+            <div class="space-y-3">
+              <h3 class="font-heading font-semibold text-2xl text-white group-hover:text-emerald-400 transition-colors">
+                Integración de Agentes y Modelos de IA
+              </h3>
+              <p class="text-slate-400 font-light text-sm leading-relaxed">
+                Despliego agentes autónomos de IA y modelos avanzados (LLMs) en servidores privados virtuales (<strong class="text-slate-200">VPS independientes</strong>) con ecosistemas de código abierto como <strong class="text-slate-200">OpenClaw</strong> para máxima soberanía y privacidad.
+              </p>
+            </div>
+          </div>
+
+          <div class="mt-8 pt-6 border-t border-slate-800 space-y-3">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500">¿Qué incluye?</h4>
+            <ul class="text-xs text-slate-400 space-y-2">
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-emerald-400"></i> Agentes de soporte y cualificación</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-emerald-400"></i> Aislamiento de datos en VPS privado</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-emerald-400"></i> Orquestación con modelos locales / APIs</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE MÍ -->
+  <section id="sobre-mi" class="py-24 bg-brand-navy-900 border-t border-slate-900 relative">
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Left details: Visual background/decor -->
+        <div class="lg:col-span-5 relative flex justify-center order-2 lg:order-1">
+          <div class="relative w-full max-w-sm rounded-2xl p-6 bg-slate-950 border border-slate-800/80 shadow-xl overflow-hidden">
+            <div class="absolute top-0 right-0 w-24 h-24 bg-brand-accent-emerald/10 rounded-full blur-xl pointer-events-none"></div>
+            
+            <div class="space-y-6 relative z-10">
+              <div class="flex items-center gap-4">
+                <div class="h-12 w-12 rounded-full bg-brand-accent-emerald/15 flex items-center justify-center text-brand-accent-emerald font-bold">
+                  JB
+                </div>
+                <div>
+                  <h4 class="font-heading font-semibold text-white">Juan Camilo Bolaños</h4>
+                  <p class="text-xs text-slate-400">Consultor y Arquitecto de Sistemas IA</p>
+                </div>
+              </div>
+              
+              <div class="space-y-4">
+                <div class="flex items-start gap-3">
+                  <div class="p-1 rounded bg-slate-900 text-slate-400 mt-0.5"><i data-lucide="check-square" class="w-4 h-4 text-brand-accent-emerald"></i></div>
+                  <p class="text-xs text-slate-300 leading-normal"><strong class="text-white">Enfoque Consultivo:</strong> Menos código, más arquitectura estratégica adaptada a tu negocio.</p>
+                </div>
+                <div class="flex items-start gap-3">
+                  <div class="p-1 rounded bg-slate-900 text-slate-400 mt-0.5"><i data-lucide="check-square" class="w-4 h-4 text-brand-accent-emerald"></i></div>
+                  <p class="text-xs text-slate-300 leading-normal"><strong class="text-white">Privacidad como Estándar:</strong> Instalaciones privadas en VPS (no dependes de Zapier/Make compartidos).</p>
+                </div>
+                <div class="flex items-start gap-3">
+                  <div class="p-1 rounded bg-slate-900 text-slate-400 mt-0.5"><i data-lucide="check-square" class="w-4 h-4 text-brand-accent-emerald"></i></div>
+                  <p class="text-xs text-slate-300 leading-normal"><strong class="text-white">Diseño de Interacción:</strong> Automatizaciones diseñadas para ser amigables y eficientes para el equipo humano.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Content: Copy -->
+        <div class="lg:col-span-7 space-y-6 order-1 lg:order-2">
+          <h2 class="text-xs font-bold uppercase tracking-wider text-brand-accent-emerald">El Diseñador e Ingeniero detrás del Flujo</h2>
+          <h3 class="font-heading font-bold text-3xl sm:text-4xl text-white">
+            Uniendo Diseño de Interacción y Arquitectura de Sistemas
+          </h3>
+          <p class="text-slate-300 font-light text-base leading-relaxed">
+            Hola, soy Juan Camilo Bolaños. Mi trabajo diario consiste en traducir objetivos de negocio complejos en arquitecturas tecnológicas eficientes, ordenadas y escalables.
+          </p>
+          <p class="text-slate-400 font-light text-sm leading-relaxed">
+            Como Diseñador de Interacción, creo flujos donde las personas y la tecnología conviven sin fricción. No te vendo un software propietario que deba actualizarse constantemente; te ayudo a orquestar herramientas de código abierto como n8n y despliegues seguros en VPS independientes.
+          </p>
+          <p class="text-slate-400 font-light text-sm leading-relaxed">
+            El objetivo no es que gastes miles de dólares en servidores o desarrollo tradicional desde cero. Se trata de estructurar y conectar lo que ya tienes con la potencia de la Inteligencia Artificial de forma limpia, robusta y completamente tuya.
+          </p>
+          
+          <div class="pt-4">
+            <a href="https://wa.me/573003974565?text=Hola%20Juan%20Camilo,%20me%20gustar%C3%ADa%20agendar%20una%20sesi%C3%B3n%20de%20diagn%C3%B3stico%20estrat%C3%A9gico%20para%20mi%20negocio." 
+               target="_blank" rel="noopener noreferrer"
+               class="inline-flex items-center gap-2 text-sm font-semibold text-brand-accent-emerald hover:text-emerald-400 transition-colors">
+              <span>Agenda una llamada conmigo directamente por WhatsApp</span>
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ SECTION -->
+  <section id="faq" class="py-24 bg-brand-navy-950 relative">
+    <div class="max-w-4xl mx-auto px-6 relative z-10">
+      
+      <!-- Section Header -->
+      <div class="text-center space-y-4 mb-16">
+        <h2 class="text-xs font-bold uppercase tracking-wider text-brand-accent-cyan">Preguntas Frecuentes</h2>
+        <p class="font-heading font-bold text-3xl text-white">Despeja tus dudas antes de empezar</p>
+        <p class="text-slate-400 font-light text-sm">Todo lo que necesitas saber sobre mi modelo de integración y consultoría.</p>
+      </div>
+
+      <!-- Accordion Container -->
+      <div class="space-y-4">
+        
+        <!-- Accordion Item 1 -->
+        <div class="border border-slate-800 rounded-xl bg-slate-900/40 overflow-hidden transition-colors duration-300 hover:border-slate-700/80">
+          <button class="w-full flex items-center justify-between p-6 text-left focus:outline-none accordion-header" aria-expanded="false">
+            <span class="font-heading font-semibold text-slate-100 hover:text-white transition-colors pr-4">
+              ¿Desarrollas software desde cero?
+            </span>
+            <span class="text-slate-400 flex-shrink-0 w-6 h-6 flex items-center justify-center rounded-full bg-slate-800 border border-slate-700 accordion-icon-container">
+              <i data-lucide="plus" class="w-4 h-4 transition-transform duration-300 accordion-icon"></i>
+            </span>
+          </button>
+          <div class="accordion-content">
+            <div class="p-6 pt-0 text-slate-400 font-light text-sm border-t border-slate-800/40 leading-relaxed">
+              No. Mi enfoque es la eficiencia. En lugar de pasar meses escribiendo código a medida para una base de datos o un CRM, integro y configuro soluciones robustas y probadas en el mercado (como n8n, APIs de IA y automatizaciones de flujos). Esto reduce drásticamente el tiempo de entrega y el coste de mantenimiento para tu negocio.
+            </div>
+          </div>
+        </div>
+
+        <!-- Accordion Item 2 -->
+        <div class="border border-slate-800 rounded-xl bg-slate-900/40 overflow-hidden transition-colors duration-300 hover:border-slate-700/80">
+          <button class="w-full flex items-center justify-between p-6 text-left focus:outline-none accordion-header" aria-expanded="false">
+            <span class="font-heading font-semibold text-slate-100 hover:text-white transition-colors pr-4">
+              ¿Qué herramientas utilizas en tus proyectos?
+            </span>
+            <span class="text-slate-400 flex-shrink-0 w-6 h-6 flex items-center justify-center rounded-full bg-slate-800 border border-slate-700 accordion-icon-container">
+              <i data-lucide="plus" class="w-4 h-4 transition-transform duration-300 accordion-icon"></i>
+            </span>
+          </button>
+          <div class="accordion-content">
+            <div class="p-6 pt-0 text-slate-400 font-light text-sm border-t border-slate-800/40 leading-relaxed">
+              Utilizo principalmente orquestadores de flujos como n8n (que permite una flexibilidad y privacidad infinitas en comparación con Zapier), bases de datos modernas (Supabase, PostgreSQL), herramientas de IA generativa (OpenClaw, OpenAI, Anthropic) y despliegues en servidores privados virtuales (VPS) como Hetzner o DigitalOcean.
+            </div>
+          </div>
+        </div>
+
+        <!-- Accordion Item 3 -->
+        <div class="border border-slate-800 rounded-xl bg-slate-900/40 overflow-hidden transition-colors duration-300 hover:border-slate-700/80">
+          <button class="w-full flex items-center justify-between p-6 text-left focus:outline-none accordion-header" aria-expanded="false">
+            <span class="font-heading font-semibold text-slate-100 hover:text-white transition-colors pr-4">
+              ¿Cómo se maneja la privacidad de mis datos?
+            </span>
+            <span class="text-slate-400 flex-shrink-0 w-6 h-6 flex items-center justify-center rounded-full bg-slate-800 border border-slate-700 accordion-icon-container">
+              <i data-lucide="plus" class="w-4 h-4 transition-transform duration-300 accordion-icon"></i>
+            </span>
+          </button>
+          <div class="accordion-content">
+            <div class="p-6 pt-0 text-slate-400 font-light text-sm border-t border-slate-800/40 leading-relaxed">
+              A diferencia de otras soluciones que envían tus datos confidenciales a través de servidores compartidos de terceros con suscripciones costosas, implemento las automatizaciones de IA y n8n en tu propio Servidor Privado Virtual (VPS). Esto garantiza que la información de tu negocio no pase por intermediarios y se mantenga 100% bajo tu control.
+            </div>
+          </div>
+        </div>
+
+        <!-- Accordion Item 4 -->
+        <div class="border border-slate-800 rounded-xl bg-slate-900/40 overflow-hidden transition-colors duration-300 hover:border-slate-700/80">
+          <button class="w-full flex items-center justify-between p-6 text-left focus:outline-none accordion-header" aria-expanded="false">
+            <span class="font-heading font-semibold text-slate-100 hover:text-white transition-colors pr-4">
+              ¿Cómo funciona el proceso de trabajo?
+            </span>
+            <span class="text-slate-400 flex-shrink-0 w-6 h-6 flex items-center justify-center rounded-full bg-slate-800 border border-slate-700 accordion-icon-container">
+              <i data-lucide="plus" class="w-4 h-4 transition-transform duration-300 accordion-icon"></i>
+            </span>
+          </button>
+          <div class="accordion-content">
+            <div class="p-6 pt-0 text-slate-400 font-light text-sm border-t border-slate-800/40 leading-relaxed">
+              Comenzamos con una sesión de diagnóstico estratégico de 30 minutos por WhatsApp/Meet para entender tus dolores operativos. Si hay viabilidad, realizamos una auditoría profunda de tus flujos de trabajo actuales y diseñamos una propuesta de implementación por fases con entregables claros.
+            </div>
+          </div>
+        </div>
+
+        <!-- Accordion Item 5 -->
+        <div class="border border-slate-800 rounded-xl bg-slate-900/40 overflow-hidden transition-colors duration-300 hover:border-slate-700/80">
+          <button class="w-full flex items-center justify-between p-6 text-left focus:outline-none accordion-header" aria-expanded="false">
+            <span class="font-heading font-semibold text-slate-100 hover:text-white transition-colors pr-4">
+              ¿Cuál es el coste y la duración promedio de un proyecto?
+            </span>
+            <span class="text-slate-400 flex-shrink-0 w-6 h-6 flex items-center justify-center rounded-full bg-slate-800 border border-slate-700 accordion-icon-container">
+              <i data-lucide="plus" class="w-4 h-4 transition-transform duration-300 accordion-icon"></i>
+            </span>
+          </button>
+          <div class="accordion-content">
+            <div class="p-6 pt-0 text-slate-400 font-light text-sm border-t border-slate-800/40 leading-relaxed">
+              Cada proyecto se cotiza a medida tras la auditoría inicial de requerimientos. Un proyecto de automatización de flujos estándar suele durar de 2 a 4 semanas. La consultoría inicial de diagnóstico estratégico es totalmente gratuita y te ayudará a entender si tu negocio es apto para automatizar.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL Y CONTACTO -->
+  <section class="py-24 bg-brand-navy-900 border-t border-slate-900 relative overflow-hidden">
+    <!-- Visual Gradient Ambient Glow -->
+    <div class="absolute -top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-gradient-to-tr from-brand-accent-emerald/10 to-brand-accent-cyan/10 rounded-full blur-[140px] pointer-events-none"></div>
+
+    <div class="max-w-4xl mx-auto px-6 text-center relative z-10 space-y-8">
+      
+      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-950 border border-slate-800 text-xs font-semibold text-brand-accent-emerald">
+        <span class="flex h-2 w-2 relative">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-accent-emerald"></span>
+        </span>
+        Diagnóstico Estratégico Gratuito
+      </div>
+
+      <h2 class="font-heading font-extrabold text-4xl sm:text-5xl text-white tracking-tight">
+        ¿Listo para optimizar e integrar tu negocio?
+      </h2>
+      
+      <p class="text-slate-400 font-light text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+        Agenda una sesión corta de 30 minutos sin compromiso. Evaluaremos tus procesos actuales y saldrás con un plan claro de qué automatizar hoy mismo.
+      </p>
+
+      <!-- Primary Action CTA -->
+      <div class="pt-4 flex flex-col items-center gap-4">
+        <a id="footer-cta" href="https://wa.me/573003974565?text=Hola%20Juan%20Camilo,%20me%20gustar%C3%ADa%20agendar%20una%20sesi%C3%B3n%20de%20diagn%C3%B3stico%20estrat%C3%A9gico%20para%20mi%20negocio." 
+           target="_blank" rel="noopener noreferrer"
+           class="inline-flex items-center justify-center gap-3 px-8 py-4 text-base font-bold rounded-xl text-brand-navy-950 bg-brand-accent-emerald hover:bg-emerald-400 transition-all duration-300 hover:scale-[1.02] shadow-lg shadow-brand-accent-emerald/20 hover:shadow-brand-accent-emerald/30 group">
+          <i data-lucide="message-square" class="w-5 h-5 fill-brand-navy-950"></i>
+          <span>Agendar Sesión por WhatsApp</span>
+          <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i>
+        </a>
+        <p class="text-xs text-slate-500 font-light">
+          WhatsApp Directo: Respuesta ágil garantizada.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-brand-navy-950 border-t border-slate-900 py-12">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+      
+      <!-- Footer Logo Brand -->
+      <div class="flex items-center space-x-2">
+        <div class="h-8 w-8 rounded bg-gradient-to-tr from-brand-accent-emerald to-brand-accent-cyan flex items-center justify-center text-brand-navy-950 font-bold text-base font-heading">
+          JC
+        </div>
+        <span class="font-heading font-semibold text-sm tracking-tight text-white">
+          Juan Camilo Bolaños <span class="text-slate-500 font-light text-xs">| Sistemas de IA</span>
+        </span>
+      </div>
+
+      <!-- Copyright Statement -->
+      <p class="text-xs text-slate-500 text-center md:text-right">
+        &copy; 2026 Juan Camilo Bolaños. Todos los derechos reservados. <br class="sm:hidden">
+        Diseñado estratégicamente para conversión e integración.
+      </p>
+
+    </div>
+  </footer>
+
+  <!-- LIGHTWEIGHT INTERACTIVE JAVASCRIPT -->
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // Elements
+    const header = document.getElementById('main-header');
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+    const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+    // Header scroll background behavior
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.classList.add('py-2', 'bg-brand-navy-950/90', 'shadow-lg');
+        header.classList.remove('bg-transparent');
+      } else {
+        header.classList.remove('py-2', 'bg-brand-navy-950/90', 'shadow-lg');
+      }
+    });
+
+    // Mobile Menu Toggle
+    mobileMenuBtn.addEventListener('click', () => {
+      const isHidden = mobileMenu.classList.contains('hidden');
+      if (isHidden) {
+        mobileMenu.classList.remove('hidden');
+        mobileMenuBtn.innerHTML = '<i data-lucide="x" class="w-6 h-6"></i>';
+      } else {
+        mobileMenu.classList.add('hidden');
+        mobileMenuBtn.innerHTML = '<i data-lucide="menu" class="w-6 h-6"></i>';
+      }
+      lucide.createIcons(); // Re-render icon
+    });
+
+    // Close Mobile Menu on Link Click
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        mobileMenuBtn.innerHTML = '<i data-lucide="menu" class="w-6 h-6"></i>';
+        lucide.createIcons();
+      });
+    });
+
+    // Accordion Interaction (Vanilla JS)
+    accordionHeaders.forEach(header => {
+      header.addEventListener('click', () => {
+        const item = header.parentElement;
+        const content = item.querySelector('.accordion-content');
+        const icon = item.querySelector('.accordion-icon');
+        const iconContainer = item.querySelector('.accordion-icon-container');
+        const isExpanded = header.getAttribute('aria-expanded') === 'true';
+
+        // Close all other accordions
+        accordionHeaders.forEach(otherHeader => {
+          if (otherHeader !== header) {
+            const otherItem = otherHeader.parentElement;
+            const otherContent = otherItem.querySelector('.accordion-content');
+            const otherIcon = otherItem.querySelector('.accordion-icon');
+            const otherIconContainer = otherItem.querySelector('.accordion-icon-container');
+            
+            otherHeader.setAttribute('aria-expanded', 'false');
+            otherContent.style.maxHeight = '0';
+            otherIcon.style.transform = 'rotate(0deg)';
+            otherIcon.setAttribute('data-lucide', 'plus');
+            otherIconContainer.classList.remove('bg-brand-accent-cyan', 'text-brand-navy-950', 'border-brand-accent-cyan');
+            otherIconContainer.classList.add('bg-slate-800', 'text-slate-400', 'border-slate-700');
+          }
+        });
+
+        // Toggle current accordion
+        if (isExpanded) {
+          header.setAttribute('aria-expanded', 'false');
+          content.style.maxHeight = '0';
+          icon.style.transform = 'rotate(0deg)';
+          iconContainer.classList.remove('bg-brand-accent-cyan', 'text-brand-navy-950', 'border-brand-accent-cyan');
+          iconContainer.classList.add('bg-slate-800', 'text-slate-400', 'border-slate-700');
+        } else {
+          header.setAttribute('aria-expanded', 'true');
+          content.style.maxHeight = content.scrollHeight + 'px';
+          icon.style.transform = 'rotate(45deg)'; // Rotates plus to make a close mark or X/multiply sign
+          iconContainer.classList.add('bg-brand-accent-cyan', 'text-brand-navy-950', 'border-brand-accent-cyan');
+          iconContainer.classList.remove('bg-slate-800', 'text-slate-400', 'border-slate-700');
+        }
+        
+        // Re-draw icons inside buttons if state changes icon type
+        lucide.createIcons();
+      });
+    });
+
+    // Entrance Animation (Intersection Observer for fade-in effect)
+    const fadeItems = document.querySelectorAll('.fade-in-up');
+    const observerOptions = {
+      root: null,
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    fadeItems.forEach(item => {
+      observer.observe(item);
+    });
+
+    // Fast inline trigger to reveal Hero instantly on load
+    window.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('hero-content').classList.add('visible');
+      document.getElementById('hero-image-container').classList.add('visible');
+    });
+  </script>
+</body>
+</html>
